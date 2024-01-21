@@ -5,10 +5,16 @@ import './Characters.css';
 import { InfinitySpin } from "react-loader-spinner";//Se instala con npm (https://mhnpd.github.io/react-loader-spinner/docs/components/infinity-spin)
 
 
-function Characters2() {
+function Characters2({ search}) {
     const endpoint = '/pokemon';
     const [characters2, setCharacters2] = useState([]);
     const [loading, setLoading] = useState(true);
+    //4f) Se recibe el valor de search desde App.js y se muestra en consola
+    console.log('En characters2: ' + search);
+
+    //5f) si search es distinto de vacio se hace un filtro de los pokemones, si no se muestra la lista completa
+    const filteredCharacters = search ? characters2.filter(character => character.name.includes(search.toLowerCase())) : characters2;
+    
 
     useEffect(() => {
         api2.get(endpoint)
@@ -29,8 +35,7 @@ function Characters2() {
 
     return (
         <div>
-            <h2>Characters2</h2>
-            {console.log(characters2)}
+            <h2>Pokemons</h2>
             {
                 loading
                 ? 
@@ -42,14 +47,19 @@ function Characters2() {
                 />
                 :
                 <div className="character-container">
-                    {characters2.map((character, index) => (
-                        <Card2 
-                            key={index}
-                            id={index + 1} // Si quieres usar el índice como ID
-                            name={character.name}
-                            image={character.sprites.front_default}
-                        />
-                    ))}
+                    {
+                        filteredCharacters.map(character => {
+                            const { id, name, sprites } = character;
+                            return (
+                                <Card2
+                                    key={id}
+                                    id={id}
+                                    name={name}
+                                    image={sprites.front_default}
+                                />
+                            );
+                        })//6f) Se muestra la lista de pokemones filtrada o completa
+                    }
                 </div>
             }
         </div>
