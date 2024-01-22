@@ -4,9 +4,10 @@ import './App.css';
 import Footer from './components/Footer/Footer';
 import Main from './components/Main/Main';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import Characters2 from './components/Characters/Characters2';
+import Pokemons from './components/Characters/Pokemons';
 import Characters from './components/Characters/Characters';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { Card } from 'react-bootstrap';
 
 
 function App() {
@@ -19,8 +20,9 @@ function App() {
 
       <Routes>
         <Route path="/" element={<Main/>}/>
-        <Route path="/characters1" element={<Characters search={search}/>}/>
-        <Route path="/characters2" element={<Characters2 search={search}/>}/>
+        <Route path="/characters" element={<Characters search={search}/>}/>
+        <Route path="/pokemons" element={<Pokemons search={search}/>}/>
+        <Route exact path="pokemons/:name" element={<Card/>}/>
       </Routes>
 
       <Footer/>  

@@ -20,6 +20,7 @@ function Characters({search}) {
                     result.name = result.name.toLowerCase();
                 });
                 setCharacters(results);
+                //console.log(results);
             })
             setTimeout(() => {
                 setLoading(false);
@@ -49,9 +50,9 @@ function Characters({search}) {
                             return (
                                 <Card2
                                     key={id}
-                                    id={id}
                                     name={name}
                                     image={image}
+                                    endpoint={endpoint}
                                 />
                             );
                         })

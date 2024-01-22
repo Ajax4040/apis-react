@@ -1,6 +1,7 @@
 import React from 'react';
 import { Card as BootstrapCard } from 'react-bootstrap';
 //import './Card.css';
+import Button from 'react-bootstrap/Button';
 
 const Card = ({ id, name, status, gender, image }) => {
     return (
@@ -10,7 +11,8 @@ const Card = ({ id, name, status, gender, image }) => {
                 <BootstrapCard.Title>{name}</BootstrapCard.Title>
                 <BootstrapCard.Text>ID: {id}</BootstrapCard.Text>
                 <BootstrapCard.Text>Status: {status}</BootstrapCard.Text>
-                <BootstrapCard.Text>Status: {gender}</BootstrapCard.Text>
+                <BootstrapCard.Text>Gender: {gender}</BootstrapCard.Text>
+                <Button variant="outline-success">Volver</Button>
             </BootstrapCard.Body>
         </BootstrapCard>
     );

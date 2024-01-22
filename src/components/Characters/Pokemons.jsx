@@ -1,16 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import Card2 from '../Card/Card2';
 import api2 from '../../utils/api2';
-import './Characters.css';
+import './Pokemons.css';
 import { InfinitySpin } from "react-loader-spinner";//Se instala con npm (https://mhnpd.github.io/react-loader-spinner/docs/components/infinity-spin)
 
 
-function Characters2({ search}) {
+function Pokemons({ search}) {
     const endpoint = '/pokemon';
     const [characters2, setCharacters2] = useState([]);
     const [loading, setLoading] = useState(true);
     //4f) Se recibe el valor de search desde App.js y se muestra en consola
-    console.log('En characters2: ' + search);
+    console.log('En Pokemons: ' + search);
 
     //5f) si search es distinto de vacio se hace un filtro de los pokemones, si no se muestra la lista completa
     const filteredCharacters = search ? characters2.filter(character => character.name.includes(search.toLowerCase())) : characters2;
@@ -19,9 +19,11 @@ function Characters2({ search}) {
         api2.get(endpoint)
             .then(response => {
                 const { results } = response.data; // desestructuración de la lista de pokémon
+                //console.log(results);
                 return Promise.all(results.map(pokemon => {
                     return api2.get(pokemon.url); // Solicitar detalles para cada Pokémon
                 }));
+                
             })
             .then(detailsResponses => {
                 const pokemonDetails = detailsResponses.map(res => res.data);
@@ -52,9 +54,9 @@ function Characters2({ search}) {
                             return (
                                 <Card2
                                     key={id}
-                                    id={id}
                                     name={name}
                                     image={sprites.front_default}
+                                    endpoint={endpoint}
                                 />
                             );
                         })//6f) Se muestra la lista de pokemones filtrada o completa
@@ -65,4 +67,4 @@ function Characters2({ search}) {
     );
 }
 
-export default Characters2;
+export default Pokemons;
