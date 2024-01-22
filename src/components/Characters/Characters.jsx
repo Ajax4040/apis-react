@@ -5,15 +5,20 @@ import './Characters.css';
 import { InfinitySpin } from "react-loader-spinner";//Se instala con npm (https://mhnpd.github.io/react-loader-spinner/docs/components/infinity-spin)
 
 
-function Characters() {
+function Characters({search}) {
     const endpoint = '/character';
     const [characters, setCharacters] = useState([]);
     const [loading, setLoading] = useState(true);
+    console.log('En characters1: ' + search);
 
     useEffect(() => {
         api.get(endpoint)
             .then(response => {
                 const { results } = response.data; // desestructuración de data
+                //de results, tomar el name, cambiarlo a minúsculas y guardarlo de nuevo en results
+                results.forEach(result => {
+                    result.name = result.name.toLowerCase();
+                });
                 setCharacters(results);
             })
             setTimeout(() => {
@@ -21,9 +26,12 @@ function Characters() {
             }, 3000);
     }, [endpoint]);
 
+    //5f) si search es distinto de vacio se hace un filtro de los characters, si no se muestra la lista completa
+    const filteredCharacters = search ? characters.filter(character => character.name.includes(search.toLowerCase())) : characters;
+
     return (
         <div>
-            <h2>Characters</h2>
+            <h2>Rick and Morty characters</h2>
             {
                 loading
                 ? 
@@ -35,16 +43,19 @@ function Characters() {
                 />
                 :
                 <div className="character-container">
-                    {characters.map((character) => (
-                        <Card2 
-                            key={character.id}
-                            id={character.id}
-                            name={character.name}
-                            status={character.status}
-                            gender={character.gender}
-                            image={character.image}
-                        />
-                    ))}
+                    {
+                        filteredCharacters.map(character => {
+                            const { id, name, image } = character;
+                            return (
+                                <Card2
+                                    key={id}
+                                    id={id}
+                                    name={name}
+                                    image={image}
+                                />
+                            );
+                        })
+                    }
                 </div>
             }
         </div>

@@ -13,7 +13,7 @@ function Nav({ setSearch }) {
   return (
     <Navbar expand="lg" className="bg-body-tertiary">
       <Container fluid>
-        <Navbar.Brand>Buscador</Navbar.Brand>
+        <Navbar.Brand><a href='/'>Home</a></Navbar.Brand>
         <Navbar.Toggle aria-controls="navbarScroll" />
         <Navbar.Collapse id="navbarScroll">
           <Form className="d-flex ms-auto">

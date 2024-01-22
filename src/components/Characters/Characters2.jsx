@@ -15,7 +15,6 @@ function Characters2({ search}) {
     //5f) si search es distinto de vacio se hace un filtro de los pokemones, si no se muestra la lista completa
     const filteredCharacters = search ? characters2.filter(character => character.name.includes(search.toLowerCase())) : characters2;
     
-
     useEffect(() => {
         api2.get(endpoint)
             .then(response => {
