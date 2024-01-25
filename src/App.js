@@ -8,6 +8,7 @@ import Pokemons from './components/Characters/Pokemons';
 import Characters from './components/Characters/Characters';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { Card } from 'react-bootstrap';
+import Contact from './components/Contact/Contact';
 
 
 function App() {
@@ -23,6 +24,7 @@ function App() {
         <Route path="/characters" element={<Characters search={search}/>}/>
         <Route path="/pokemons" element={<Pokemons search={search}/>}/>
         <Route exact path="pokemons/:name" element={<Card/>}/>
+        <Route exact path="/contact" element={<Contact/>}/>
       </Routes>
 
       <Footer/>  
