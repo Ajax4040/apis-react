@@ -1,20 +1,36 @@
 import React from 'react';
 import { Card as BootstrapCard } from 'react-bootstrap';
-//import './Card.css';
-import Button from 'react-bootstrap/Button';
+import './CardInfo.css';
+import { Link } from 'react-router-dom';
+import { useContext } from 'react';
+import { CardContext } from '../../context/CardContext';
 
-const Card = ({ id, name, status, gender, image }) => {
+
+const Card = () => {
+    const { characters2 } = useContext(CardContext);
+    //Tomar el nombre del endpoint de la url
+    const endpoint = window.location.pathname.split('/')[1];
+
+    const character = characters2.find(character => character.name === endpoint);
+
+    console.log(character);
+
+    //destructuring del objeto character
+    const { sprites, name , id, height, } = character;
+    const nameMayus = name.toUpperCase();
+
     return (
-        <BootstrapCard style={{ width: '18rem' }}>
-            <BootstrapCard.Img variant="top" src={image} />
-            <BootstrapCard.Body>
-                <BootstrapCard.Title>{name}</BootstrapCard.Title>
-                <BootstrapCard.Text>ID: {id}</BootstrapCard.Text>
-                <BootstrapCard.Text>Status: {status}</BootstrapCard.Text>
-                <BootstrapCard.Text>Gender: {gender}</BootstrapCard.Text>
-                <Button variant="outline-success">Volver</Button>
-            </BootstrapCard.Body>
-        </BootstrapCard>
+        <div className="cardInfo">
+            <BootstrapCard style={{ width: '15rem' }}>
+                <BootstrapCard.Img variant="top" src={sprites.front_default} style={{ backgroundColor: '#f5f5f5' }}/>
+                <BootstrapCard.Body>
+                    <BootstrapCard.Title>{nameMayus}</BootstrapCard.Title>
+                    <BootstrapCard.Text>ID: {id}</BootstrapCard.Text>
+                    <BootstrapCard.Text>Height: {height}''</BootstrapCard.Text>
+                    <Link to={`/pokemons`} className='btn btn-info btn-lg'>Volver</Link>
+                </BootstrapCard.Body>
+            </BootstrapCard>
+        </div>
     );
 }
 

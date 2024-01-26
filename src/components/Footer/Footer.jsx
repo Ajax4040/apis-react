@@ -4,7 +4,7 @@ import './Footer.css'
 function Footer() {
   return (
     <div className='footer'>
-        <h1 style={{color: 'red'}}>Footer</h1>
+        <h3 style={{color: 'red'}}>Footer</h3>
     </div>
   )
 }

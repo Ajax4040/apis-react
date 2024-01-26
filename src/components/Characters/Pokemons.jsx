@@ -8,7 +8,7 @@ import { useContext } from 'react';
 
 function Pokemons({ search}) {
 
-    const [endpoint] = useState('pokemon');//2f) Se crea el estado de endpoint en Pokemons.jsx con el valor inicial de pokemon
+    const [endpoint] = useState('pokemon');
     const { characters2, loading } = useContext(CardContext);
 
     //5f) si search es distinto de vacio se hace un filtro de los pokemones, si no se muestra la lista completa
@@ -28,6 +28,7 @@ function Pokemons({ search}) {
                 />
                 :
                 <div className="character-container">
+                    {console.log('En pokemons...')}
                     {console.log(characters2)}
                     {
                         filteredCharacters.map(character => {

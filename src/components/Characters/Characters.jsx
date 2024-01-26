@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import Card2 from '../Card/Card2';
+import Card3 from '../Card/Card3';
 import api from '../../utils/api';
 import './Characters.css';
 import { InfinitySpin } from "react-loader-spinner";//Se instala con npm (https://mhnpd.github.io/react-loader-spinner/docs/components/infinity-spin)
@@ -9,7 +9,6 @@ function Characters({search}) {
     const endpoint = '/character';
     const [characters, setCharacters] = useState([]);
     const [loading, setLoading] = useState(true);
-    console.log('En characters1: ' + search);
 
     useEffect(() => {
         api.get(endpoint)
@@ -20,7 +19,6 @@ function Characters({search}) {
                     result.name = result.name.toLowerCase();
                 });
                 setCharacters(results);
-                //console.log(results);
             })
             setTimeout(() => {
                 setLoading(false);
@@ -32,6 +30,7 @@ function Characters({search}) {
 
     return (
         <div>
+            {console.log(characters)}
             <h2>Rick and Morty characters</h2>
             {
                 loading
@@ -46,12 +45,14 @@ function Characters({search}) {
                 <div className="character-container">
                     {
                         filteredCharacters.map(character => {
-                            const { id, name, image } = character;
+                            const { id, name, image, status, gender } = character;
                             return (
-                                <Card2
+                                <Card3
                                     key={id}
                                     name={name}
                                     image={image}
+                                    status={status}
+                                    gender={gender}
                                     endpoint={endpoint}
                                 />
                             );

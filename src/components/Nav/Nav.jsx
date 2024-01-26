@@ -7,7 +7,7 @@ import './Nav.css';
 function Nav({ setSearch }) {
 
   const handleChange = (e) => {
-    setSearch(e.target.value)//2f) Se le pasa el valor del input al setSearch que va App.js
+    setSearch(e.target.value)//2f) Se le pasa el valor del input al setSearch que va App.js --> App.js
   }
 
   return (
